@@ -4,10 +4,6 @@ const hbs = require('hbs');
 const moment = require('moment-timezone');
 const PORT = process.env.PORT || 3000;
 
-const jun = moment(1597512062 * 1000);
-console.log(jun);
-console.log(jun.tz('Europe/London').format('dddd, DD MMMM, YYYY h:m'));
-
 const geocode = require('./utils/geocode');
 const forecast = require('./utils/forecast');
 
