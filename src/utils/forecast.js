@@ -30,21 +30,18 @@ const forecast = (latitude, longitude, callback) => {
     '&lon=' +
     longitude +
     '&exclude=daily,hourly&appid=ad84aa67c8d41bc332984b7a5ba492fb';
-  axios.get(url).then((res) => {
-    if(res.error){
-      callback('No location found', undefined);
-    }else{
-      callback(undefined, {
-        temp: res.data.current.temp,
-        date: res.data.current.dt,
-        sunrise: res.data.current.sunrise,
-        sunset: res.data.current.sunset,
-      })
-    }
-
-  }).catch((error) => {
-    callback('Unable to get forecast', undefined);
-  })
-}
+  axios
+    .get(url)
+    .then((res) => {
+      if (res.error) {
+        callback('No location found', undefined);
+      } else {
+        callback(undefined, res.data);
+      }
+    })
+    .catch((error) => {
+      callback(error, undefined);
+    });
+};
 
 module.exports = forecast;

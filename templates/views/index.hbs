@@ -8,11 +8,39 @@
   <title>Express App</title>
   <link rel="icon" href="/img/weather.png">
   <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+    integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+
 </head>
 
 <body>
-  {{>header}}
-  {{>footer}}
+
+  <div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-lg-6">
+        <div class="card shadow rounded-lg">
+          <div class="card-header d-flex justify-content-center">
+            <form id="fetch-weather-form" class="d-flex">
+              <input type="text" name="address" class="form-control" placeholder="Address">
+              <button type="submit" class="btn btn-primary ml-3">Search</button>
+            </form>
+          </div>
+          <div class="card-body content-body px-4 position-relative">
+            <div class="preloader">
+              <span class="fas fa-spinner fa-spin" data-fa-transform="grow-20"></span>
+            </div>
+            <h3 class="font-size-lg font-weight-boder text-center text-secondary">No Address Given</h3>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"
+    integrity="sha512-YSdqvJoZr83hj76AIVdOcvLWYMWzy6sJyIMic2aQz5kh2bPTd9dzY3NtdeEAzPp/PhgZqr4aJObB3ym/vsItMg=="
+    crossorigin="anonymous"></script>
+  <script src="js/script.js"></script>
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const hbs = require('hbs');
-const moment = require('moment-timezone');
+const utils = require('./utils/utils');
 const PORT = process.env.PORT || 3000;
 
 const geocode = require('./utils/geocode');
@@ -24,10 +24,7 @@ app.use(express.static(publicDirectoryPath));
 
 // Routes
 app.get('', (req, res) => {
-  res.render('index', {
-    title: 'Home',
-    name: 'Ovi',
-  });
+  return res.render('index');
 });
 app.get('/about', (req, res) => {
   res.render('about', {
@@ -60,9 +57,20 @@ app.get('/weather', (req, res) => {
     const { latitude, longitude, location } = data;
     forecast(latitude, longitude, (error, forecastData) => {
       error && res.send({ error });
+      const today = utils.getFullDate(
+        forecastData.current.dt,
+        forecastData.timezone
+      );
+      const temperature = utils.getKelbinToCelcius(forecastData.current.temp);
+      const feelsLike = utils.getKelbinToCelcius(
+        forecastData.current.feels_like
+      );
       return res.send({
-        forecastData,
+        today,
+        temperature,
         location,
+        feelsLike,
+        weather: forecastData.current.weather[0],
         address: req.query.address,
       });
     });

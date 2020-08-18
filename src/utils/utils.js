@@ -1,3 +1,4 @@
+const moment = require('moment-timezone');
 const months = [
   'January',
   'February',
@@ -37,7 +38,13 @@ const getTodayDate = (timestamp) => {
 const getKelbinToCelcius = (kelbin) => {
   return parseFloat(kelbin - 272.15).toFixed(2) + '°C';
 };
+const getFullDate = (timestamp, timezone) => {
+  return moment(timestamp * 1000)
+    .tz(timezone)
+    .format('h:ma, dddd, D MMMM, YYYY');
+};
 module.exports = {
   getTodayDate,
   getKelbinToCelcius,
+  getFullDate,
 };
